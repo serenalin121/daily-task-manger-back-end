@@ -20,33 +20,33 @@ const app = express()
 require('./config/db.connection')
 
 // Middlewares
-const whitelist = ['http://localhost:3000', 'heroku frontend url here']
-const corsOptions = {
-  origin: (origin, callback) => {
-    if(whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-  credentials:true
-}
-
-app.use(cors(corsOptions))
-
-app.use(session({
-  secret: "serflandyl",
-  resave: false,
-  saveUninitialized: false,
-}))
-
-const isAuthenticated = (req, res, next) => {
-    if (req.session.currentUser) {
-        return next()
-    } else {
-        res.status(403).json({msg:"login required"})
-    }
-}
+// const whitelist = ['http://localhost:3000', 'heroku frontend url here']
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if(whitelist.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   },
+//   credentials:true
+// }
+//
+// app.use(cors(corsOptions))
+//
+// app.use(session({
+//   secret: "serflandyl",
+//   resave: false,
+//   saveUninitialized: false,
+// }))
+//
+// const isAuthenticated = (req, res, next) => {
+//     if (req.session.currentUser) {
+//         return next()
+//     } else {
+//         res.status(403).json({msg:"login required"})
+//     }
+// }
 
 app.use(express.json());
 
@@ -56,10 +56,10 @@ app.get('/', function (req, res) {
 })
 
 app.use('/tasks', isAuthenticated, routes.tasks)
-app.use('/users', routes.users)
+// app.use('/users', routes.users)
 
 
-// Server Bind 
+// Server Bind
 app.listen(PORT, () => {
   console.log(`Connected on Port:${PORT}`);
 });
