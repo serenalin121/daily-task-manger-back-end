@@ -1,23 +1,23 @@
 // External  modules
-const express = require('express')
+const express = require("express");
 
 //Internal  modules
-const routes = require('./routes')
+const routes = require("./routes");
 
 // CORS
-const cors = require('cors')
+// const cors = require("cors");
 
 // Session
-const session = require('express-session')
+// const session = require("express-session");
 
 // PORT
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3003;
 
 // Express Instance
-const app = express()
+const app = express();
 
 // DB connection
-require('./config/db.connection')
+require("./config/db.connection");
 
 // Middlewares
 // const whitelist = ['http://localhost:3000', 'heroku frontend url here']
@@ -51,13 +51,11 @@ require('./config/db.connection')
 app.use(express.json());
 
 // Routes
-app.get('/', function (req, res) {
+app.get("/", function (req, res) {});
 
-})
-
-app.use('/tasks', isAuthenticated, routes.tasks)
+// app.use("/tasks", isAuthenticated, routes.tasks)
+app.use("/tasks", routes.tasks);
 // app.use('/users', routes.users)
-
 
 // Server Bind
 app.listen(PORT, () => {
