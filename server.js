@@ -5,7 +5,7 @@ const express = require("express");
 const routes = require("./routes");
 
 // CORS
-// const cors = require("cors");
+const cors = require("cors");
 
 // Session
 // const session = require("express-session");
@@ -20,19 +20,19 @@ const app = express();
 require("./config/db.connection");
 
 // Middlewares
-// const whitelist = ['http://localhost:3000', 'heroku frontend url here']
-// const corsOptions = {
-//   origin: (origin, callback) => {
-//     if(whitelist.indexOf(origin) !== -1 || !origin) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   },
-//   credentials:true
-// }
-//
-// app.use(cors(corsOptions))
+const whitelist = ["http://localhost:3000", "heroku frontend url here"];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 //
 // app.use(session({
 //   secret: "serflandyl",
