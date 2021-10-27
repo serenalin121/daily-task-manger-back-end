@@ -16,16 +16,11 @@ const PORT = process.env.PORT || 3003;
 // Express Instance
 const app = express();
 
-const MongoDBStore = require("connect-mongodb-session")(session);
-
 // DB connection
 require("./config/db.connection");
 
 // Middlewares
-const whitelist = [
-  "http://localhost:3000",
-  "https://daily-task-manager-front-end.herokuapp.com/",
-];
+const whitelist = ["http://localhost:3000", "heroku frontend url here"];
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
@@ -39,25 +34,17 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.set("trust proxy", 1);
-
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: "serflandyl",
     resave: false,
     saveUninitialized: false,
-    store: new MongoDBStore({
-      uri: process.env.MONGODBURI,
-      collection: "mySessions",
-    }),
-    cookie: {
-      sameSite: "none",
-      secure: true,
-    },
   })
 );
 
 const isAuthenticated = (req, res, next) => {
+  console.log(req.session);
+
   if (req.session.currentUser) {
     return next();
   } else {
