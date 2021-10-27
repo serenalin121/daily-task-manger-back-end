@@ -7,7 +7,8 @@ const signup = (req, res) => {
     if (error) {
       res.status(400).json({error: error.message})
     } else {
-      res.status(201).json(createdUser)
+      console.log(createdUser)
+      res.status(200).json(createdUser)
     }
   })
 }
@@ -18,6 +19,8 @@ const signin = (req, res) => {
       res.send(error)
     } else {
       if (foundUser) {
+        console.log(req.body.password)
+        console.log(foundUser.password)
         if (bcrypt.compareSync(req.body.password, foundUser.password)) {
           req.session.currentUser = foundUser
           res.status(200).json(foundUser)
