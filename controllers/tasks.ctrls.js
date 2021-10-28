@@ -1,12 +1,34 @@
 const db = require("../models");
 
-const index = (req, res) => {
-  db.Task.find({}, (err, tasks) => {
-    if (err) return res.status(400).json({ err: err.message });
-
-    return res.status(200).json(tasks);
-  });
-};
+const index = async (req, res) => {
+  try {
+    if (req.session.currentUser === undefined) {
+      res.json({
+        status: 401,
+        message: 'Log in to see Tasks'
+      })
+    } else {
+      const foundUser = await db.User.find(req.session.currentUser).
+      populate({
+        path: 'tasks',
+        populate: {path: 'users'}
+      })
+      return res.status(204).json(foundUser.tasks)
+    }
+  }
+  catch(error){
+    console.log(error)
+    res.json({
+      status: 400,
+      error: error
+    })
+  }
+  // db.Task.find({}, (err, tasks) => {
+  //   if (err) return res.status(400).json({ err: err.message });
+  //
+  //   return res.status(200).json(tasks);
+  // });
+}
 
 const create = (req, res) => {
   db.Task.create(req.body, (err, createdTask) => {
