@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const User = require('./User')
 
 const taskSchema = new mongoose.Schema({
   name: {
@@ -13,6 +14,10 @@ const taskSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  users: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 })
 
 const Task = mongoose.model('Task', taskSchema)
