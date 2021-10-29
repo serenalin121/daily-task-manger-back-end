@@ -13,7 +13,7 @@ const index = async (req, res) => {
         path: 'tasks',
         populate: {path: 'users'}
       })
-      return res.status(204).json(foundUser.tasks)
+      return res.status(200).json(foundUser.tasks)
     }
   }
   catch(error){
