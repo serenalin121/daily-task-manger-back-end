@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const Task = require('./Task')
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -11,12 +11,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  tasks:[{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Task'
-  }]
-})
+  tasks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Task",
+    },
+  ],
+});
 
-const User = mongoose.model('User', userSchema)
+const User = model("User", userSchema);
 
-module.exports = User
+module.exports = User;
