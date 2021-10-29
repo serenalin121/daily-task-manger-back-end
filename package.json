@@ -2,7 +2,7 @@
   "name": "daily-task-manger-back-end",
   "version": "1.0.0",
   "engines": {
-    "node": "16.7.0"
+    "node": "16.11.1"
   },
   "description": "",
   "main": "server.js",
