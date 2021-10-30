@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3003;
 // Express Instance
 const app = express();
 
-const MongoDBStore = require('connect-mongodb-session')
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 // DB connection
 require("./config/db.connection");
