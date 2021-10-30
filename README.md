@@ -1,6 +1,20 @@
 # daily-task-manger-back-end
 Welcome to the daily task manager app! We wanted users to be able to add daily tasks for themselves and assign a due date of completion. We then wanted users to be able to mark each task as either complete or incomplete. The app also includes a login/register form.
 
+This is the backend repository.
+
+Check out the frontend repository [here](https://github.com/serenalin121/daily-task-manager-front-end).
+
+See the project in action [here](https://taskappfrontend.herokuapp.com/).
+
+## Team Members
+[Flannery](https://github.com/fwils001)
+
+[Dylan](https://github.com/Dbar90)
+
+[Serena](https://github.com/serenalin121)
+
+
 > Here are our models including field names and their datatypes:
 ```
 const userSchema = new mongoose.Schema({
