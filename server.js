@@ -39,19 +39,26 @@ app.use(cors(corsOptions));
 app.set("trust proxy", 1)
 
 app.use(session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoDBStore({
-      uri: process.env.MONGODBURI,
-      collection: "mySessions"
-    }),
-    cookie: {
-      sameSite: "none",
-      secure: true
-    }
-  })
-);
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoDBStore({
+    uri: process.env.MONGODB_URI,
+    collection: 'mySessions'
+  }),
+  cookie: {
+    sameSite: 'none',
+    secure: true
+  }
+}))
+
+
+// what we had before deployment, for reference
+// app.use(session({
+//   secret: "asdffjk",
+//   resave: false,
+//   saveUninitialized: false,
+// }))
 
 const isAuthenticated = (req, res, next) => {
   console.log(req.session);

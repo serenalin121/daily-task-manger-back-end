@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const connectionStr = process.env.MONGODBURI || "mongodb://localhost:27017/tasksDB"
+const connectionStr = process.env.MONGODB_URI || "mongodb://localhost:27017/tasksDB"
 
 mongoose.connect(connectionStr, {
   useNewUrlParser:true,
